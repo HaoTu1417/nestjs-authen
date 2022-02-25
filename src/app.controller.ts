@@ -10,16 +10,11 @@ export class AppController {
   @UseGuards(LocalAuthGuard)
   @Post('login')
   login(@Request() req): any {
-    console.log(Object.keys(req));
-    console.log(typeof req);
     return { msg: 'Logged in' };
   }
 
-  @UseGuards(AuthenticatedGuard)
   @Get('protected')
   getHello(@Request() req): any {
-    // console.log(Object.keys(req));
-    // console.log(typeof req);
     return req.user;
   }
 }
