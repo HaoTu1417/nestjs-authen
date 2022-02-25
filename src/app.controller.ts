@@ -12,11 +12,11 @@ export class AppController {
   login(@Request() req): any {
     console.log(Object.keys(req));
     console.log(typeof req);
-    return req.user;
+    return { msg: 'Logged in' };
   }
 
   @UseGuards(AuthenticatedGuard)
-  @Post('protected')
+  @Get('protected')
   getHello(@Request() req): any {
     // console.log(Object.keys(req));
     // console.log(typeof req);

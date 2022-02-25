@@ -1,17 +1,10 @@
-import { Injectable, CanActivate, ExecutionContext } from '@nestjs/common';
-import { Observable } from 'rxjs';
+// src/common/guards/authenticated.guard.ts
+import { ExecutionContext, Injectable, CanActivate } from '@nestjs/common';
 
 @Injectable()
 export class AuthenticatedGuard implements CanActivate {
-  canActivate(
-    context: ExecutionContext,
-  ): boolean | Promise<boolean> | Observable<boolean> {
-    const http = context.switchToHttp();
-    // console.log('http:', http);
-    const request = http.getRequest();
-    console.log(Object.keys(request));
-    //console.log(request.client);
-    return true;
-    //return validateRequest(request);
+  async canActivate(context: ExecutionContext) {
+    const request = context.switchToHttp().getRequest();
+    return request.isAuthenticated();
   }
 }
